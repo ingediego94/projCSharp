@@ -18,4 +18,6 @@ public class AppDbContext : DbContext
         
         base.OnModelCreating(modelBuilder);
     }
+    
+    public DbSet<User> Users { get; set; } 
 }
