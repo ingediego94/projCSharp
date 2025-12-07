@@ -5,7 +5,7 @@ using projCSharp.Infrastructure.Data;
 
 namespace projCSharp.Infrastructure.Repositories;
 
-public class UserRepository : IRepository<User>
+public class UserRepository : IGeneralRepository<User>
 {
     private readonly AppDbContext _context;
 
@@ -61,8 +61,13 @@ public class UserRepository : IRepository<User>
 
     
     // DELETE:
-    public async Task<bool> DeleteAsync(User user)
+    public async Task<bool> DeleteAsync(int id)
     {
+        var user = await _context.Users.FindAsync(id);
+
+        if (user == null)
+            return false;
+        
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
         return true;

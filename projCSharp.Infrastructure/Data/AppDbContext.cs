@@ -15,9 +15,13 @@ public class AppDbContext : DbContext
         var user = modelBuilder.Entity<User>();
         user.HasIndex(u => u.Email)
             .IsUnique();
+        user.HasIndex(u => u.NumDoc)
+            .IsUnique();
         
         base.OnModelCreating(modelBuilder);
     }
     
-    public DbSet<User> Users { get; set; } 
+    public DbSet<User> Users { get; set; }
+    public DbSet<Categorie> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
 }
